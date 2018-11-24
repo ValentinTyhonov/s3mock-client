@@ -1,0 +1,9 @@
+info:
+  application:
+    name: @project.name@
+    version: @project.version@
+    description: @project.description@
+
+s3:
+  endpoint: http://127.0.0.1:8001
+  region: us-west-2
