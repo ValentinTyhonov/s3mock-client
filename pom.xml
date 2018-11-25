@@ -26,6 +26,7 @@
         <lombok.version>1.18.4</lombok.version>
         <aws-java-sdk-s3.version>1.11.442</aws-java-sdk-s3.version>
         <swagger.version>2.9.2</swagger.version>
+        <dockerfile-maven-plugin.version>1.4.9</dockerfile-maven-plugin.version>
         <docker.image.prefix>valentintyhonov</docker.image.prefix>
     </properties>
 
@@ -74,7 +75,7 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.9</version>
+                <version>${dockerfile-maven-plugin.version}</version>
                 <configuration>
                     <repository>${docker.image.prefix}/${project.artifactId}</repository>
                 </configuration>
