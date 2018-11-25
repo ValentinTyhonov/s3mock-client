@@ -43,7 +43,11 @@ public class SwaggerConfig {
                 applicationProperties.getDescription(),
                 applicationProperties.getVersion(),
                 "",
-                new Contact("Valentin", "", "valentin.tyhonov@gmail.com"),
+                new Contact(
+                    "",
+                    "https://github.com/ValentinTyhonov/s3mock-client",
+                    "valentin.tyhonov@gmail.com"
+                ),
                 "", "", Collections.emptyList()
         );
     }
