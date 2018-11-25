@@ -26,6 +26,7 @@
         <lombok.version>1.18.4</lombok.version>
         <aws-java-sdk-s3.version>1.11.442</aws-java-sdk-s3.version>
         <swagger.version>2.9.2</swagger.version>
+        <docker.image.prefix>valentintyhonov</docker.image.prefix>
     </properties>
 
     <dependencies>
@@ -69,6 +70,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>dockerfile-maven-plugin</artifactId>
+                <version>1.4.9</version>
+                <configuration>
+                    <repository>${docker.image.prefix}/${project.artifactId}</repository>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -1,3 +1,6 @@
+server:
+  port: 8008
+
 info:
   application:
     name: @project.name@
