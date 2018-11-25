@@ -1,10 +1,10 @@
-#S3mock client
+# S3mock client
 
 This project provides API for easy interaction with mocked S3 ([s3mock](https://hub.docker.com/r/max8github/s3mock/)).
 
 Application can be ran using [docker image](https://hub.docker.com/r/valentintyhonov/s3mock-client/).
 
-###Configurations
+### Configurations
 As both s3mock and s3mock-client should should be linked, [docker-compose](https://docs.docker.com/compose/) 
 can be used for running containers together.
 
@@ -39,7 +39,7 @@ These directories would be mounted as /var/lib/s3client and /var/lib/s3server in
 
 _client_ directory is needed to there files, user will push to mocked S3 using API.
 
-####Notes:
+#### Notes:
 * to run containers - `docker-compose up -d`
 * to update s3mock-client image without stopping s3mock container - `docker-compose up -d --no-deps --build client`
 * to stop and remove containers - `docker-compose down`
