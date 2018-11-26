@@ -12,6 +12,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,17 +35,35 @@ public class S3Controller {
         this.s3Service = s3Service;
     }
 
-    @GetMapping("buckets")
+    @GetMapping("list-buckets")
     @ApiOperation("List all buckets")
     public List<Bucket> listBuckets() {
         return s3Service.listBuckets();
     }
 
-    @GetMapping("files")
+    @GetMapping("list-files")
     @ApiOperation("List all files in bucket")
     public ListObjectsV2Result listFilesInBucket(@ApiParam(value = "bucket name", required = true)
                                                  @RequestParam("bucket") final String bucketName) {
         return s3Service.listFilesInBucket(bucketName);
+    }
+
+    @GetMapping("file")
+    @ApiOperation("Get file from S3")
+    public ResponseEntity<Resource> fileDownload(@ApiParam(value = "bucket name", required = true)
+                                                 @RequestParam("bucket") final String bucketName,
+                                                 @ApiParam(value = "file path", required = true)
+                                                 @RequestParam("file") final String filePath) {
+        String[] pathParts = filePath.split("/");
+        String targetFileName = pathParts[pathParts.length - 1];
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + targetFileName);
+
+        return ResponseEntity.ok()
+            .headers(headers)
+            .contentType(MediaType.parseMediaType("application/octet-stream"))
+            .body(s3Service.getFileFromBucket(bucketName, filePath, targetFileName));
     }
 
     @PostMapping("bucket")

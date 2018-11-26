@@ -3,6 +3,7 @@ package com.vtyhonov.s3mockclient.controller.handler;
 import com.vtyhonov.s3mockclient.dto.ResponseDto;
 import com.vtyhonov.s3mockclient.exceptions.BucketAlreadyExistsException;
 import com.vtyhonov.s3mockclient.exceptions.BucketDoesNotExistException;
+import com.vtyhonov.s3mockclient.exceptions.DownloadFileException;
 import com.vtyhonov.s3mockclient.exceptions.FileAlreadyExistsException;
 import com.vtyhonov.s3mockclient.exceptions.FileDoesNotExistException;
 
@@ -27,5 +28,11 @@ public class ControllerExceptionHandler {
     public ResponseEntity handleNotFoundException(final RuntimeException exception, final WebRequest request) {
         ResponseDto response = new ResponseDto(HttpStatus.NOT_FOUND.value(), exception.getMessage());
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler({DownloadFileException.class})
+    public ResponseEntity handleInternalServerErrorException(final RuntimeException exception, final WebRequest request) {
+        ResponseDto response = new ResponseDto(HttpStatus.INTERNAL_SERVER_ERROR.value(), exception.getMessage());
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
