@@ -6,7 +6,7 @@
 
     <groupId>com.vtyhonov</groupId>
     <artifactId>s3mock-client</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <packaging>jar</packaging>
 
     <name>s3mock-client</name>
